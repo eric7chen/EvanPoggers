@@ -25,7 +25,7 @@ for line in word_file:
         i += 1
 
 # print(words_dictionary)
-csv_file = open("words.csv", "w")
+csv_file = open("words.csv", "w", newline="")
 writer = csv.writer(csv_file)
 for key, value in words_dictionary.items():
     writer.writerow([key, value])
