@@ -3,7 +3,6 @@ import tweepy as tw
 import pandas as pd
 from tweepy.streaming import StreamListener
 from credentials import *
-import text2emotion as te
 
 class NewTweetListener(tw.StreamListener):
 
@@ -11,6 +10,7 @@ class NewTweetListener(tw.StreamListener):
         super(StreamListener, self).__init__()
         self.api = api
         self.user_id = user_id
+        self.word_sentiment = pd.read_csv('words.csv', header=None)
 
     def on_status(self, tweet):
         print(tweet.text)
@@ -19,7 +19,6 @@ class NewTweetListener(tw.StreamListener):
         tweet.favorite()
 
     def reply(self, tweet):
-            te.get_emotion(tweet.text)
             self.api.update_status(status = 'pogchamp', in_reply_to_status_id = tweet.id , auto_populate_reply_metadata=True)
 
 def main():
